@@ -1,4 +1,19 @@
 <!DOCTYPE html>
+<!--
+*&---------------------------------------------------------------------*
+*& Report  Z_JOSEPH_SCIACCA_RESUME
+*&---------------------------------------------------------------------*
+*&  Author:        Joseph Sciacca
+*&  Created:       2026-05
+*&  Description:   Personal landing page; resume & professional summary
+*&  Transport:     SCIACCA-ME (manual deployment via GitHub Pages)
+*&  TADIR Object:  CUS&PERS / WAPA
+*&  Lock Object:   None (read access, all clients)
+*&---------------------------------------------------------------------*
+*  Note: If you're reading this in View Source, you probably know
+*        why this header is here. Hi, fellow SAP person.
+*----------------------------------------------------------------------*
+-->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -1017,6 +1032,93 @@
     reveals.forEach((el, i) => {
       el.style.transitionDelay = (i * 80) + 'ms';
     });
+
+    const banner = [
+      '%c',
+      '   ╔══════════════════════════════════════════════════════════╗',
+      '   ║                                                          ║',
+      '   ║   Joseph Sciacca · joseph@sciacca.me                     ║',
+      '   ║   Senior Enterprise Applications Manager                 ║',
+      '   ║                                                          ║',
+      '   ╚══════════════════════════════════════════════════════════╝',
+      '',
+      '   You found the dev console. Hi.',
+      '',
+      '   If you have an open req for someone who has shepherded a',
+      '   private-cloud S/4HANA migration without losing sleep (much),',
+      '   spent the last 20 years in SAP, and now thinks carefully',
+      '   about AI in enterprise apps — let\'s talk.',
+      '',
+      '   PS: I do read view-source. Hope the markup is to your taste.',
+      ''
+    ].join('\n');
+
+    console.log(
+      banner,
+      'color: #e8a657; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; line-height: 1.4;'
+    );
+
+    const avatar = document.querySelector('.avatar');
+    let clickCount = 0;
+    let clickTimer = null;
+
+    if (avatar) {
+      avatar.style.cursor = 'pointer';
+      avatar.addEventListener('click', () => {
+        clickCount++;
+        clearTimeout(clickTimer);
+        clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
+
+        if (clickCount === 5) {
+          clickCount = 0;
+          triggerEgg();
+        }
+      });
+    }
+
+    function triggerEgg() {
+      const overlay = document.createElement('div');
+      overlay.setAttribute('role', 'status');
+      overlay.setAttribute('aria-live', 'polite');
+      overlay.style.cssText = [
+        'position: fixed',
+        'top: 20px',
+        'right: 20px',
+        'z-index: 9999',
+        'background: #161c25',
+        'border: 0.5px solid rgba(232, 166, 87, 0.4)',
+        'border-radius: 10px',
+        'padding: 14px 18px',
+        'font-family: ui-monospace, SFMono-Regular, Menlo, monospace',
+        'font-size: 12.5px',
+        'color: #e8ebf2',
+        'box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 24px rgba(232, 166, 87, 0.12)',
+        'max-width: 320px',
+        'opacity: 0',
+        'transform: translateY(-8px)',
+        'transition: opacity 0.4s ease, transform 0.4s ease',
+        'pointer-events: none'
+      ].join(';');
+
+      overlay.innerHTML = [
+        '<div style="color:#e8a657; font-weight:600; margin-bottom:6px;">SY-SUBRC = 0</div>',
+        '<div style="color:#a8b0c2; line-height:1.5;">Authorization check passed.</div>',
+        '<div style="color:#a8b0c2; line-height:1.5;">Welcome, power user. <span style="color:#e8a657;">↗</span></div>'
+      ].join('');
+
+      document.body.appendChild(overlay);
+
+      requestAnimationFrame(() => {
+        overlay.style.opacity = '1';
+        overlay.style.transform = 'translateY(0)';
+      });
+
+      setTimeout(() => {
+        overlay.style.opacity = '0';
+        overlay.style.transform = 'translateY(-8px)';
+        setTimeout(() => overlay.remove(), 500);
+      }, 3800);
+    }
   </script>
 </body>
 </html>
