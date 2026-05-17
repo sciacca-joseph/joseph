@@ -699,6 +699,45 @@
       z-index: 1;
     }
 
+    .education-section {
+      position: relative;
+      padding: 1.5rem 1.75rem 1.75rem;
+      border-radius: 14px;
+      border: 0.5px solid var(--border);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .education-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-image: url('northeastern.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.18;
+      filter: saturate(0.6) contrast(0.95) brightness(0.85);
+      transition: opacity 0.5s ease, filter 0.5s ease;
+    }
+
+    .education-section::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(180deg,
+        rgba(22, 28, 37, 0.55) 0%,
+        rgba(22, 28, 37, 0.75) 60%,
+        rgba(22, 28, 37, 0.88) 100%);
+      pointer-events: none;
+    }
+
+    .education-section:hover .education-bg {
+      opacity: 0.28;
+    }
+
+    .education-section h2 { margin-top: 0; }
+
     .education-item {
       margin-bottom: 14px;
       padding-left: 16px;
@@ -766,6 +805,8 @@
       .job-header { flex-direction: column; gap: 6px; }
       .skills-grid { grid-template-columns: 1fr; }
       h2 { font-size: 19px; }
+      .education-section { padding: 1.25rem 1.25rem 1.5rem; }
+      .education-bg { opacity: 0.22; }
     }
 
     @media print {
@@ -785,6 +826,9 @@
       .title, .stat-label, .edu-school, .skill-content { color: #5a5a5a; }
       .job-company, .name-accent, .skill-label, .project-title, .h2-number { color: #b8862f; }
       .stat, .project, .skill-group, .job-dates { background: #f5f3ed; border-color: #d8d4c8; }
+      .education-section { padding: 0; border: none; }
+      .education-bg { display: none; }
+      .education-section::after { display: none; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -988,19 +1032,29 @@
       </div>
     </section>
 
-    <section class="reveal">
+    <!--
+      Education section background image:
+      "Northeastern University, Boston" by Eden Aviv (https://commons.wikimedia.org/wiki/User:Edenaviv5)
+      Licensed under CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
+      Source: https://commons.wikimedia.org/w/index.php?curid=138551210
+      Modifications: cropped, desaturated, and overlaid with gradient for stylistic integration.
+    -->
+    <section class="reveal education-section" title="Photo: Northeastern University by Eden Aviv (CC BY-SA 4.0) — commons.wikimedia.org/wiki/User:Edenaviv5">
+      <div class="education-bg" aria-hidden="true"></div>
       <h2>
         <span class="h2-number">03</span>
         Education
         <span class="h2-line"></span>
       </h2>
-      <div class="education-item">
-        <div class="edu-degree">MS, Information Systems</div>
-        <div class="edu-school">Northeastern University, College of Engineering · Boston, MA</div>
-      </div>
-      <div class="education-item">
-        <div class="edu-degree">BS, Environmental Geology</div>
-        <div class="edu-school">Northeastern University · Boston, MA</div>
+      <div class="education-list">
+        <div class="education-item">
+          <div class="edu-degree">MS, Information Systems</div>
+          <div class="edu-school">Northeastern University, College of Engineering · Boston, MA</div>
+        </div>
+        <div class="education-item">
+          <div class="edu-degree">BS, Environmental Geology</div>
+          <div class="edu-school">Northeastern University · Boston, MA</div>
+        </div>
       </div>
     </section>
 
